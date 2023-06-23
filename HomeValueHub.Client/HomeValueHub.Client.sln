@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeValueHub.Client", "HomeValueHub.Client\HomeValueHub.Client.csproj", "{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A988931D-ABD2-4F02-BB2D-064681D0B2A2}
+	EndGlobalSection
+EndGlobal
