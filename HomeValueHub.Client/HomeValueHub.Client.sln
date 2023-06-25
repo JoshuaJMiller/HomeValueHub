@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.Client", "HomeValueHub.Client\HomeValueHub.Client.csproj", "{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.Shared", "..\HomeValueHub.Shared\HomeValueHub.Shared\HomeValueHub.Shared.csproj", "{5CD10BC2-C5CB-4A67-9F94-3F79947DB207}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64DCB4C4-B960-4B7D-A8C5-44C6464D1BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD10BC2-C5CB-4A67-9F94-3F79947DB207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD10BC2-C5CB-4A67-9F94-3F79947DB207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD10BC2-C5CB-4A67-9F94-3F79947DB207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD10BC2-C5CB-4A67-9F94-3F79947DB207}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

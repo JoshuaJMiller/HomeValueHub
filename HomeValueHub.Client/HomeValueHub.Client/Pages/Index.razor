@@ -1,5 +1,8 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="mt-5 display-4">Selling Your Home?</h1>
+    <h3 class="mt-5">Instantly discover how much your home is worth</h3>
+    <button class="btn btn-outline-success mt-5" @onclick='() => NavigationManager.NavigateTo("/estimate")'>Get Started</button>
 </div>

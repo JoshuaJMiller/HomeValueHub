@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\HomeValueHub.Shared\HomeValueHub.Shared\HomeValueHub.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,32 @@
+﻿@page "/estimate"
+@inject NavigationManager NavigationManager
+
+<div class="medium-center-content">
+    <div class="card">
+    <h1>Enter Home Features</h1>
+        <div class="card-body p-5">
+            <EditForm Model="HomeFeatures" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <div class="mb-3">
+                    <label class="required-caption" for="bedrooms">Bedrooms</label>
+                    <InputNumber id="bedrooms" class="form-control" @bind-Value="HomeFeatures.Bedrooms" />
+                    <ValidationMessage For="@(() => HomeFeatures.Bedrooms)" />
+                </div>
+                <div class="mb-3">
+                    <label class="required-caption" for="bathrooms">Bathrooms</label>
+                    <InputNumber id="bathrooms" class="form-control" @bind-Value="HomeFeatures.Bathrooms" />
+                    <ValidationMessage For="@(() => HomeFeatures.Bathrooms)" />
+                </div>
+                <div class="mb-3">
+                    <label class="required-caption" for="square-feet">Bedrooms</label>
+                    <InputNumber id="square-feet" class="form-control" @bind-Value="HomeFeatures.FinishedSquareFeet" />
+                    <ValidationMessage For="@(() => HomeFeatures.FinishedSquareFeet)" />
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mt-3">Sumbit</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+    
