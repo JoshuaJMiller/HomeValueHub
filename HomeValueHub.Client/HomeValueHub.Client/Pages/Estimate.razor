@@ -2,31 +2,110 @@
 @inject NavigationManager NavigationManager
 
 <div class="medium-center-content">
-    <div class="card">
-    <h1>Enter Home Features</h1>
-        <div class="card-body p-5">
-            <EditForm Model="HomeFeatures" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <div class="mb-3">
-                    <label class="required-caption" for="bedrooms">Bedrooms</label>
-                    <InputNumber id="bedrooms" class="form-control" @bind-Value="HomeFeatures.Bedrooms" />
-                    <ValidationMessage For="@(() => HomeFeatures.Bedrooms)" />
+    <div class="card bg-light shadow">
+
+        @if (currentStep == 1)
+        {
+            <h1>Enter Home Features</h1>
+            <div class="card-body p-5">
+                <EditForm Model="HomeDetails.Features" OnValidSubmit="HandleValidNext">
+                    <DataAnnotationsValidator />
+                    <div class="mb-3">
+                        <InputRadioGroup @bind-Value="HomeDetails.Features.Bedrooms">
+                            <label for="bedrooms">Bedrooms</label><br />
+                            <div class="btn-group mt-2">
+                                <InputRadio class="btn-check" id="studio" Value=0 />
+                                <label class="btn btn-outline-secondary" for="studio">Studio</label>
+                                <InputRadio class="btn-check" id="one-bed" Value=1 />
+                                <label class="btn btn-outline-secondary" for="one-bed">1</label>
+                                <InputRadio class="btn-check" id="two-bed" Value=2 />
+                                <label class="btn btn-outline-secondary" for="two-bed">2</label>
+                                <InputRadio class="btn-check" id="three-bed" Value=3 />
+                                <label class="btn btn-outline-secondary" for="three-bed">3</label>
+                                <InputRadio class="btn-check" id="four-bed" Value=4 />
+                                <label class="btn btn-outline-secondary" for="four-bed">4</label>
+                                <InputRadio class="btn-check" id="five-plus-bed" Value=5 />
+                                <label class="btn btn-outline-secondary" for="five-plus-bed">5+</label>
+                            </div>
+                        </InputRadioGroup>
+                        <ValidationMessage For="@(() => HomeDetails.Features.Bedrooms)" />
+                    </div>
+                    <div class="mb-3">
+                        <InputRadioGroup @bind-Value="HomeDetails.Features.Bathrooms">
+                            <label for="bathrooms">Bathrooms</label><br />
+                            <div class="btn-group mt-2">
+                                <InputRadio class="btn-check" id="one-bath" Value=1 />
+                                <label class="btn btn-outline-secondary" for="one-bath">1</label>
+                                <InputRadio class="btn-check" id="two-bath" Value=2 />
+                                <label class="btn btn-outline-secondary" for="two-bath">2</label>
+                                <InputRadio class="btn-check" id="three-bath" Value=3 />
+                                <label class="btn btn-outline-secondary" for="three-bath">3</label>
+                                <InputRadio class="btn-check" id="four-plus-bath" Value=4 />
+                                <label class="btn btn-outline-secondary" for="four-plus-bath">4+</label>
+                            </div>
+                        </InputRadioGroup>
+                        <ValidationMessage For="@(() => HomeDetails.Features.Bathrooms)" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="square-feet">Finished Square Feet</label>
+                        <InputNumber id="square-feet" class="form-control mt-2" @bind-Value="HomeDetails.Features.FinishedSquareFeet" />
+                        <ValidationMessage For="@(() => HomeDetails.Features.FinishedSquareFeet)" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="total-rooms">Total Number of Rooms</label>
+                        <InputNumber id="total-rooms" class="form-control mt-2" @bind-Value="HomeDetails.Features.TotalRooms" />
+                        <ValidationMessage For="@(() => HomeDetails.Features.TotalRooms)" />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mt-3">Next</button>
+                    </div>
+                </EditForm>
+                <div class="text-center mt-3 mb-0">
+                    <p class="d-inline-block mb-0">Registered?</p>
+                    <a class="d-inline-block" href="">log in</a>
                 </div>
-                <div class="mb-3">
-                    <label class="required-caption" for="bathrooms">Bathrooms</label>
-                    <InputNumber id="bathrooms" class="form-control" @bind-Value="HomeFeatures.Bathrooms" />
-                    <ValidationMessage For="@(() => HomeFeatures.Bathrooms)" />
+            </div>
+        }
+        else if (currentStep == 2)
+        {
+            <h1>Enter Home Location</h1>
+            <div class="card-body p-5">
+                <EditForm Model="HomeDetails.Location" OnValidSubmit="HandleValidNext">
+                    <DataAnnotationsValidator />
+                    <div class="mb-3">
+                        <label for="zip-code">Zip Code</label>
+                        <InputText id="zip-code" class="form-control mt-2" @bind-Value="HomeDetails.Location.ZipCode" />
+                        <ValidationMessage For="@(() => HomeDetails.Location.ZipCode)" />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" @onclick='() => currentStep--' class="btn btn-outline-primary mt-3">Previous</button>
+                        <button type="submit" class="btn btn-primary mt-3">Next</button>
+                    </div>
+                </EditForm>
+                <div class="text-center mt-3 mb-0">
+                    <p class="d-inline-block mb-0">Registered?</p>
+                    <a class="d-inline-block" href="">log in</a>
                 </div>
-                <div class="mb-3">
-                    <label class="required-caption" for="square-feet">Bedrooms</label>
-                    <InputNumber id="square-feet" class="form-control" @bind-Value="HomeFeatures.FinishedSquareFeet" />
-                    <ValidationMessage For="@(() => HomeFeatures.FinishedSquareFeet)" />
+            </div>
+        }
+        else if (currentStep == 3)
+        {
+            <h1>Get Estimate!</h1>
+            <div class="card-body p-5">
+                <EditForm Model="HomeDetails" OnValidSubmit="HandleValidSubmit">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" @onclick='() => currentStep--' class="btn btn-outline-primary mt-3">Previous</button>
+                        <button type="submit" class="btn btn-success mt-3">Submit</button>
+                    </div>
+                </EditForm>
+                <div class="text-center mt-3 mb-0">
+                    <p class="d-inline-block mb-0">Registered?</p>
+                    <a class="d-inline-block" href="">log in</a>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary mt-3">Sumbit</button>
-                </div>
-            </EditForm>
-        </div>
+            </div>
+        }
+
+
     </div>
 </div>
     
