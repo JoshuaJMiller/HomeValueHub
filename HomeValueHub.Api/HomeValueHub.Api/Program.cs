@@ -7,9 +7,15 @@ namespace HomeValueHub.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                builder.WithOrigins("https://localhost:7210")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader());
+            });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -26,8 +32,9 @@ namespace HomeValueHub.Api
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
+            app.UseCors();
 
             app.Run();
         }

@@ -2,9 +2,9 @@
 
 namespace HomeValueHub.Shared.Models
 {
-    public class HomeDetails
+    public class HomeDetail
     {
-        public HomeDetails()
+        public HomeDetail()
         {
             Features = new HomeFeatures();
             Location = new HomeLocation();
@@ -32,9 +32,11 @@ namespace HomeValueHub.Shared.Models
         public int Bathrooms { get; set; }
 
         [Required]
+        [Range(1, double.MaxValue, ErrorMessage = "Finished Square Feet must be greater that 0.")]
         public decimal FinishedSquareFeet { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Total Rooms must be greater than 0.")]
         public int TotalRooms { get; set; }
     }
 

@@ -14,6 +14,11 @@ namespace HomeValueHub.Client
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+            builder.Services.AddHttpClient("hvh", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7278/");
+            });
+
             await builder.Build().RunAsync();
         }
     }
