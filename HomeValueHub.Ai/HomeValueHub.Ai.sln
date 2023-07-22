@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeValueHub.Ai", "HomeValueHub.Ai\HomeValueHub.Ai.csproj", "{E11A0462-9E06-4CD4-953D-17460AB171AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.AI.ML", "HomeValueHub.AI.ML\HomeValueHub.AI.ML.csproj", "{E715E3D4-FAB8-424E-8401-F910B5199FE3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.AI.Shared", "HomeValueHub.AI.Shared\HomeValueHub.AI.Shared.csproj", "{D1AB8DAA-85B8-442E-AB8C-35AC1290F824}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.AI.UI", "HomeValueHub.AI.UI\HomeValueHub.AI.UI.csproj", "{2D5CEF83-63A4-4739-8AC8-530208C9DFA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeValueHub.AI.DependencyInjection", "HomeValueHub.AI.DependencyInjection\HomeValueHub.AI.DependencyInjection.csproj", "{B42F89FC-68DE-4DC6-A07B-F05492FDCE54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E11A0462-9E06-4CD4-953D-17460AB171AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E11A0462-9E06-4CD4-953D-17460AB171AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E11A0462-9E06-4CD4-953D-17460AB171AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E11A0462-9E06-4CD4-953D-17460AB171AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E715E3D4-FAB8-424E-8401-F910B5199FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E715E3D4-FAB8-424E-8401-F910B5199FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E715E3D4-FAB8-424E-8401-F910B5199FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E715E3D4-FAB8-424E-8401-F910B5199FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1AB8DAA-85B8-442E-AB8C-35AC1290F824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1AB8DAA-85B8-442E-AB8C-35AC1290F824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1AB8DAA-85B8-442E-AB8C-35AC1290F824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1AB8DAA-85B8-442E-AB8C-35AC1290F824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D5CEF83-63A4-4739-8AC8-530208C9DFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D5CEF83-63A4-4739-8AC8-530208C9DFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D5CEF83-63A4-4739-8AC8-530208C9DFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5CEF83-63A4-4739-8AC8-530208C9DFA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B42F89FC-68DE-4DC6-A07B-F05492FDCE54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B42F89FC-68DE-4DC6-A07B-F05492FDCE54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B42F89FC-68DE-4DC6-A07B-F05492FDCE54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B42F89FC-68DE-4DC6-A07B-F05492FDCE54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,7 @@
 ﻿using HomeValueHub.Shared.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeValueHub.Api.Controllers
+namespace HomeValueHub.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

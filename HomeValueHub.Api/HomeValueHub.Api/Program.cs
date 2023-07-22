@@ -1,4 +1,4 @@
-namespace HomeValueHub.Api
+namespace HomeValueHub.API
 {
     public class Program
     {
