@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using HomeValueHub.AI.DependencyInjection;
+﻿using HomeValueHub.AI.DependencyInjection;
+using HomeValueHub.AI.UI.Extensions;
+using HomeValueHub.AI.UI.Pages;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HomeValueHub.AI.UI
 {
@@ -16,7 +17,7 @@ namespace HomeValueHub.AI.UI
 
             var services = new ServiceCollection();
             services.AddHvhEstimator(config);
-            services.AddSingleton<App>();
+            services.AddHvhConsole(config);
 
             var serviceProvicer = services.BuildServiceProvider();
 
@@ -25,8 +26,8 @@ namespace HomeValueHub.AI.UI
 
         static void Run(IServiceProvider serviceProvider)
         {
-            var app = serviceProvider.GetRequiredService<App>();
-            app.Run();
+            var main = serviceProvider.GetRequiredService<Main>();
+            main.Run();
         }
     }
 }
