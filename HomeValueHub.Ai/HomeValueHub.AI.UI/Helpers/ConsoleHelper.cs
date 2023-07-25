@@ -2,7 +2,7 @@
 {
     internal static class ConsoleHelper
     {
-        internal static string? GetInput(string? prompt = null)
+        internal static string? GetInput(string? prompt = null, bool caseSenstive = false)
         {
             if (string.IsNullOrWhiteSpace(prompt))
             {
@@ -20,7 +20,7 @@
             if (!string.IsNullOrWhiteSpace(response))
             {
                 Console.WriteLine();
-                return response.Trim().ToLower();
+                return caseSenstive ? response.Trim() : response.Trim().ToLower();
             }
 
             Console.WriteLine();

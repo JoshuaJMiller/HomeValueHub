@@ -7,15 +7,18 @@ namespace HomeValueHub.AI.ML.Services
 {
     public class EstimateModelService
     {
-        private ITransformer transformer;
-        private PredictionEngine<EstimateInput, EstimateOutput> predictionEngine;
-        private readonly MLContext context;
+        private ITransformer? transformer;
+        private IDataView? dataView;
+        private IEstimator<ITransformer>? pipeline;
 
+        private readonly MLContext context;
         private readonly string inputDataPath;
         private readonly string modelPath;
         private readonly string modelFileExtension;
 
         public bool ModelExists => Directory.EnumerateFileSystemEntries(modelPath).Any();
+        public Dictionary<string, Action<string>> PipelineCatalog { get; set; }
+        public List<string> PipelineKeys => PipelineCatalog.Select(p => p.Key.ToString()).ToList();
 
         public EstimateModelService(IOptions<EstimateModelSettings> options, MLContext context)
         {
@@ -23,33 +26,66 @@ namespace HomeValueHub.AI.ML.Services
             modelPath = options.Value.ModelPath;
             modelFileExtension = options.Value.ModelFileExtension;
             this.context = context;
+
+            PipelineCatalog = new Dictionary<string, Action<string>>
+            {
+                { "FastForest1", (x) => RunFastForest1(x) },
+                { "FastForest2", (x) => RunFastForest2(x) }
+            };
         }
 
-        public void BuildTrainBlahBlah()
+        public void RunFastForest1(string inputFileName)
         {
-            // create context
-            var context = new MLContext(seed: 0);
+            ResetState();
 
             // load data
-            var data = context.Data.LoadFromTextFile<EstimateInput>(inputDataPath, hasHeader: true, separatorChar: ',');
+            dataView = context.Data.LoadFromTextFile<EstimateInput>($"{inputDataPath}/{inputFileName}", hasHeader: true, separatorChar: ',');
 
             // split the data into training and testing
-            var trainingTestData = context.Data.TrainTestSplit(data, testFraction: 0.2, seed: 0);
+            var trainingTestData = context.Data.TrainTestSplit(dataView, testFraction: 0.2, seed: 0);
             var trainData = trainingTestData.TrainSet;
-            var testData = trainingTestData.TestSet;
 
             // build and train the model
-            var pipeline = context.Transforms.Categorical.OneHotEncoding(inputColumnName: "UseCode", outputColumnName: "UseCodeEncoded")
+            pipeline = context.Transforms.Categorical.OneHotEncoding(inputColumnName: "UseCode", outputColumnName: "UseCodeEncoded")
                 .Append(context.Transforms.Concatenate("Features", "UseCodeEncoded", "Bathrooms", "Bedrooms", "FinishedSquareFeet", "TotalRooms")
                 .Append(context.Regression.Trainers.FastForest(numberOfTrees: 200, minimumExampleCountPerLeaf: 4)));
 
-            var model = pipeline.Fit(trainData);
+            transformer = pipeline.Fit(trainData);
+        }
 
+        public void RunFastForest2(string inputFileName)
+        {
+            ResetState();
+
+            // load data
+            dataView = context.Data.LoadFromTextFile<EstimateInput>($"{inputDataPath}/{inputFileName}", hasHeader: true, separatorChar: ',');
+
+            // split the data into training and testing
+            var trainingTestData = context.Data.TrainTestSplit(dataView, testFraction: 0.2, seed: 0);
+            var trainData = trainingTestData.TrainSet;
+
+            // build and train the model
+            pipeline = context.Transforms.Categorical.OneHotEncoding(inputColumnName: "UseCode", outputColumnName: "UseCodeEncoded")
+                .Append(context.Transforms.Concatenate("Features", "UseCodeEncoded", "Bathrooms", "Bedrooms", "FinishedSquareFeet", "TotalRooms")
+                .Append(context.Regression.Trainers.FastForest(numberOfTrees: 300, minimumExampleCountPerLeaf: 6)));
+
+            transformer = pipeline.Fit(trainData);
+        }
+
+        public ModelEvaluationMetrics EvaluateFastForest()
+        {
             // evaluate the model
-            var scores = context.Regression.CrossValidate(data, pipeline, numberOfFolds: 5);
-            var mean = scores.Average(x => x.Metrics.RSquared);
+            var scores = context.Regression.CrossValidate(dataView, pipeline, numberOfFolds: 5);
 
-            Console.WriteLine($"Mean cross-validated R2 score: {mean:0.##}");
+            return new ModelEvaluationMetrics
+            {
+                RSquared = scores.Average(x => x.Metrics.RSquared)
+            };
+        }
+
+        public void SaveModel(string name)
+        {
+            string cleanedName = Path.GetFileNameWithoutExtension(name);
 
             // save model
             if (!Directory.Exists(modelPath))
@@ -57,27 +93,12 @@ namespace HomeValueHub.AI.ML.Services
                 Directory.CreateDirectory(modelPath);
             }
 
-            context.Model.Save(model, trainData.Schema, $"{modelPath}/HvhEstimateModel.zip");
-
-            // use the model
-            var input = new EstimateInput
-            {
-                Bathrooms = 1f,
-                Bedrooms = 1f,
-                TotalRooms = 3f,
-                FinishedSquareFeet = 653f,
-                UseCode = "Condominium",
-                LastSoldPrice = 0f,
-            };
-
-            var engine = context.Model.CreatePredictionEngine<EstimateInput, EstimateOutput>(model);
-
-            Console.WriteLine($"Price: {engine.Predict(input).Price:c}");
+            context.Model.Save(transformer, dataView.Schema, $"{modelPath}/{cleanedName}.zip");
         }
 
         private void LoadModel(string modelName = null)
         {
-            string fullPath = string.Empty;
+            string fullPath;
 
             if (!string.IsNullOrWhiteSpace(modelName))
             {
@@ -89,28 +110,6 @@ namespace HomeValueHub.AI.ML.Services
             }
 
             transformer = context.Model.Load(fullPath, out _);
-        }
-
-        public void Foo()
-        {
-            if (predictionEngine == null)
-            {
-                LoadModel();
-            }
-
-            var input = new EstimateInput
-            {
-                Bathrooms = 1f,
-                Bedrooms = 1f,
-                TotalRooms = 3f,
-                FinishedSquareFeet = 653f,
-                UseCode = "Condominium",
-                LastSoldPrice = 0f,
-            };
-
-            var output = predictionEngine.Predict(input);
-
-            Console.WriteLine(output.Price);
         }
 
         public List<string> GetExistingModelList()
@@ -153,10 +152,27 @@ namespace HomeValueHub.AI.ML.Services
 
             return new ModelEvaluationMetrics
             {
-                RSquared = 0
+                RSquared = 0 // replace this with real eval metric...
             };
+        }
 
-            //predictionEngine = context.Model.CreatePredictionEngine<EstimateInput, EstimateOutput>(transformer);
+        public EstimateOutput RunManualEstimate(EstimateInput input, string modelName)
+        {
+            ResetState();
+
+            LoadModel(modelName);
+
+            var engine = context.Model.CreatePredictionEngine<EstimateInput, EstimateOutput>(transformer);
+
+            return engine.Predict(input);
+        }
+
+        private void ResetState()
+        {
+            // don't love this... but keeping this service stateful works well for now
+            transformer = null;
+            dataView = null;
+            pipeline = null;
         }
     }
 }
