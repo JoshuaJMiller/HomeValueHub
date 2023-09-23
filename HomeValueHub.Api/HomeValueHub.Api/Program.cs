@@ -1,3 +1,6 @@
+using HomeValueHub.AI.DependencyInjection;
+using HomeValueHub.API.Services;
+
 namespace HomeValueHub.API
 {
     public class Program
@@ -6,7 +9,16 @@ namespace HomeValueHub.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // add configuration root
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false, true)
+                .Build();
+
+            // Add services to the container
+            builder.Services.AddHvhEstimator(config);
+            builder.Services.AddScoped<EstimateService>();
+
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -29,13 +41,9 @@ namespace HomeValueHub.API
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.UseCors();
-
             app.Run();
         }
     }

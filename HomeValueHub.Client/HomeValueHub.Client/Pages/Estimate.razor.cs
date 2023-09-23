@@ -37,6 +37,8 @@ namespace HomeValueHub.Client.Pages
             await Console.Out.WriteLineAsync("Submitting! :)");
 
             await GetEstimate();
+
+            await Console.Out.WriteLineAsync(HomeValueEstimate.SalePrice.ToString());
         }
 
         private async Task GetEstimate()
@@ -48,6 +50,8 @@ namespace HomeValueHub.Client.Pages
             var result = await client.PostAsJsonAsync("api/estimate", HomeDetail);
 
             string json = await result.Content.ReadAsStringAsync();
+
+            await Console.Out.WriteLineAsync(json);
 
             HomeValueEstimate = JsonSerializer.Deserialize<HomeValueEstimate>(json);
         }

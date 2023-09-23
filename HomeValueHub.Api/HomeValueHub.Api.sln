@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.API", "HomeVal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.Shared", "..\HomeValueHub.Shared\HomeValueHub.Shared\HomeValueHub.Shared.csproj", "{8CC14316-33A1-46BE-AA6B-95D6035DDF0E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.AI.ML", "..\HomeValueHub.AI\HomeValueHub.AI.ML\HomeValueHub.AI.ML.csproj", "{DB119F15-3134-43B3-BCE4-20FF32F93DCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeValueHub.AI.DependencyInjection", "..\HomeValueHub.AI\HomeValueHub.AI.DependencyInjection\HomeValueHub.AI.DependencyInjection.csproj", "{AA222D2B-494C-4474-906B-4E9108FA4431}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{8CC14316-33A1-46BE-AA6B-95D6035DDF0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC14316-33A1-46BE-AA6B-95D6035DDF0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC14316-33A1-46BE-AA6B-95D6035DDF0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB119F15-3134-43B3-BCE4-20FF32F93DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB119F15-3134-43B3-BCE4-20FF32F93DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB119F15-3134-43B3-BCE4-20FF32F93DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB119F15-3134-43B3-BCE4-20FF32F93DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA222D2B-494C-4474-906B-4E9108FA4431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA222D2B-494C-4474-906B-4E9108FA4431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA222D2B-494C-4474-906B-4E9108FA4431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA222D2B-494C-4474-906B-4E9108FA4431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

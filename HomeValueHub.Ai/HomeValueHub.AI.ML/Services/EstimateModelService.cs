@@ -96,13 +96,13 @@ namespace HomeValueHub.AI.ML.Services
             context.Model.Save(transformer, dataView.Schema, $"{modelPath}/{cleanedName}.zip");
         }
 
-        private void LoadModel(string modelName = null)
+        public void LoadModel(string modelName = null)
         {
             string fullPath;
 
             if (!string.IsNullOrWhiteSpace(modelName))
             {
-                fullPath = $"{modelPath}/{modelName}";
+                fullPath = $"{modelPath}/{modelName}{modelFileExtension}";
             }
             else
             {
@@ -162,9 +162,14 @@ namespace HomeValueHub.AI.ML.Services
 
             LoadModel(modelName);
 
+            return GetEstimate(input);
+        }
+
+        public EstimateOutput GetEstimate(EstimateInput estimateInput)
+        {
             var engine = context.Model.CreatePredictionEngine<EstimateInput, EstimateOutput>(transformer);
 
-            return engine.Predict(input);
+            return engine.Predict(estimateInput); 
         }
 
         private void ResetState()

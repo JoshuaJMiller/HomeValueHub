@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HomeValueHub.AI\HomeValueHub.AI.DependencyInjection\HomeValueHub.AI.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\HomeValueHub.AI\HomeValueHub.AI.ML\HomeValueHub.AI.ML.csproj" />
     <ProjectReference Include="..\..\HomeValueHub.Shared\HomeValueHub.Shared\HomeValueHub.Shared.csproj" />
   </ItemGroup>
 
